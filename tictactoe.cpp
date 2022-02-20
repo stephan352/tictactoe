@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+#include <algorithm>
 using namespace std;
 
 class Game {
@@ -25,13 +27,23 @@ class Game {
                 row3[index] = turn;
             }
         };
+
+        bool check_input(string input) {
+            int accepted_answers[9] = {1,2,3,4,5,6,7,8,9};
+            stringstream input_object(input);
+            int int_input;
+            input_object>>int_input;
+            if (find(begin(accepted_answers), end(accepted_answers), int_input)) {
+                return true;
+            } else {
+                return false;
+            }
+        };
 };
 
 int main() {
     cout << "Tic-Tac-Toe" << endl << endl;
     Game game;
-    game.display_board();
-    game.update_display("8");
-    game.display_board();
+    cout<<game.check_input("4");
     return 0;
 }
