@@ -33,17 +33,32 @@ class Game {
             stringstream input_object(input);
             int int_input;
             input_object>>int_input;
-            if (find(begin(accepted_answers), end(accepted_answers), int_input)) {
+            auto found = find(begin(accepted_answers), end(accepted_answers), int_input);
+            if (found != end(accepted_answers)) {
                 return true;
             } else {
                 return false;
             }
         };
+
+        void demand_input() {
+            string input;
+            cin >> input;
+            cout << check_input(input) << endl;
+            while (!check_input(input)) {
+                cout << "please input a number from 1 to 9." << endl;
+                cin >> input;
+            };
+            update_display(input);
+        }
+
 };
 
 int main() {
     cout << "Tic-Tac-Toe" << endl << endl;
     Game game;
-    cout<<game.check_input("4");
+    game.display_board();
+    game.demand_input();
+    game.display_board();
     return 0;
 }
