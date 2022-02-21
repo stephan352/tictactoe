@@ -13,11 +13,16 @@ class Game {
         char turn = 'x';
         vector<int> available_answer = {1,2,3,4,5,6,7,8,9};
 
-        // void init() {
-        //     cout<<endl<<"Tic-Tac-toe!"<<endl;
-        //     cout<<endl<<"Type a number from 1 to 9 to put a symbol, starting with x."<<endl;
-        //     display_board();
-        // }
+        void play() {
+            cout<<endl<<"Tic-Tac-toe!"<<endl;
+            cout<<endl<<"Type a number from 1 to 9 to put a symbol, starting with x."<<endl;
+            while (available_answer.size() > 0) {
+                cout<<"size:"<<available_answer.size()<<endl;
+                display_board();
+                demand_input();
+                toggle_turn();
+            }
+        }
 
         void display_board() {
             cout<<row1<<endl<<line<<endl<<row2<<endl<<line<<endl<<row3<<endl<<endl;
@@ -54,25 +59,29 @@ class Game {
             cin >> input;
             cout << check_input(input) << endl;
             while (!check_input(input)) {
-                cout << "please input a number from 1 to 9." << endl;
+                cout << "please input a number available on the board." << endl;
                 cin >> input;
             };
             update_display(input);
+
+            // stringstream input_object(input);
+            // int int_input;
+            // input_object>>int_input;
+            // auto delete_number = find(begin(available_answer), end(available_answer), int_input);
+            // int index = delete_number - end(available_answer);
         };
 
         void toggle_turn() {
             if (turn == 'x') {
                 turn = 'o';
             } else if (turn == 'o') {
-                turn == 'x';
+                turn = 'x';
             }
         };
 };
 
 int main() {
     Game game;
-    game.display_board();
-    game.demand_input();
-    game.display_board();
+    game.play();
     return 0;
 }
