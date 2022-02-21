@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 class Game {
@@ -10,6 +11,13 @@ class Game {
         string row2 = " 4 | 5 | 6 ";
         string row3 = " 7 | 8 | 9 ";
         char turn = 'x';
+        vector<int> available_answer = {1,2,3,4,5,6,7,8,9};
+
+        // void init() {
+        //     cout<<endl<<"Tic-Tac-toe!"<<endl;
+        //     cout<<endl<<"Type a number from 1 to 9 to put a symbol, starting with x."<<endl;
+        //     display_board();
+        // }
 
         void display_board() {
             cout<<row1<<endl<<line<<endl<<row2<<endl<<line<<endl<<row3<<endl<<endl;
@@ -29,12 +37,12 @@ class Game {
         };
 
         bool check_input(string input) {
-            int accepted_answers[9] = {1,2,3,4,5,6,7,8,9};
+            // int accepted_answers[9] = {1,2,3,4,5,6,7,8,9};
             stringstream input_object(input);
             int int_input;
             input_object>>int_input;
-            auto found = find(begin(accepted_answers), end(accepted_answers), int_input);
-            if (found != end(accepted_answers)) {
+            auto found = find(begin(available_answer), end(available_answer), int_input);
+            if (found != end(available_answer)) {
                 return true;
             } else {
                 return false;
@@ -50,12 +58,18 @@ class Game {
                 cin >> input;
             };
             update_display(input);
-        }
+        };
 
+        void toggle_turn() {
+            if (turn == 'x') {
+                turn = 'o';
+            } else if (turn == 'o') {
+                turn == 'x';
+            }
+        };
 };
 
 int main() {
-    cout << "Tic-Tac-Toe" << endl << endl;
     Game game;
     game.display_board();
     game.demand_input();
