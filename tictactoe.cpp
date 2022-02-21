@@ -13,22 +13,22 @@ class Game {
         char turn = 'x';
         vector<int> available_answer = {1,2,3,4,5,6,7,8,9};
 
-        void play() {
+        void Play() {
             cout<<endl<<"Tic-Tac-toe!"<<endl;
             cout<<endl<<"Type a number from 1 to 9 to put a symbol, starting with x."<<endl;
             while (available_answer.size() > 0) {
                 cout<<"size:"<<available_answer.size()<<endl;
-                display_board();
-                demand_input();
-                toggle_turn();
+                DisplayBoard();
+                DemandInput();
+                ToggleTurn();
             }
         }
 
-        void display_board() {
+        void DisplayBoard() {
             cout<<row1<<endl<<line<<endl<<row2<<endl<<line<<endl<<row3<<endl<<endl;
         };
 
-        void update_display(string input) {
+        void UpdateDisplay(string input) {
             if (input == "1" || input == "2" || input == "3") {
                 int index = row1.find(input);
                 row1[index] = turn;
@@ -41,7 +41,7 @@ class Game {
             }
         };
 
-        bool check_input(string input) {
+        bool CheckInput(string input) {
             // int accepted_answers[9] = {1,2,3,4,5,6,7,8,9};
             stringstream input_object(input);
             int int_input;
@@ -54,15 +54,15 @@ class Game {
             }
         };
 
-        void demand_input() {
+        void DemandInput() {
             string input;
             cin >> input;
-            cout << check_input(input) << endl;
-            while (!check_input(input)) {
+            cout << CheckInput(input) << endl;
+            while (!CheckInput(input)) {
                 cout << "please input a number available on the board." << endl;
                 cin >> input;
             };
-            update_display(input);
+            UpdateDisplay(input);
 
             // stringstream input_object(input);
             // int int_input;
@@ -71,7 +71,7 @@ class Game {
             // int index = delete_number - end(available_answer);
         };
 
-        void toggle_turn() {
+        void ToggleTurn() {
             if (turn == 'x') {
                 turn = 'o';
             } else if (turn == 'o') {
@@ -82,6 +82,6 @@ class Game {
 
 int main() {
     Game game;
-    game.play();
+    game.Play();
     return 0;
 }
