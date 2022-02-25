@@ -17,11 +17,11 @@ class Game {
             cout<<endl<<"Tic-Tac-toe!"<<endl;
             cout<<endl<<"Type a number from 1 to 9 to put a symbol, starting with x."<<endl;
             while (available_answer.size() > 0) {
-                cout<<"size:"<<available_answer.size()<<endl;
                 DisplayBoard();
                 DemandInput();
                 ToggleTurn();
             }
+            DisplayBoard();
         }
 
         void DisplayBoard() {
@@ -42,7 +42,6 @@ class Game {
         };
 
         bool CheckInput(string input) {
-            // int accepted_answers[9] = {1,2,3,4,5,6,7,8,9};
             stringstream input_object(input);
             int int_input;
             input_object>>int_input;
@@ -57,18 +56,16 @@ class Game {
         void DemandInput() {
             string input;
             cin >> input;
-            cout << CheckInput(input) << endl;
             while (!CheckInput(input)) {
                 cout << "please input a number available on the board." << endl;
                 cin >> input;
             };
             UpdateDisplay(input);
 
-            // stringstream input_object(input);
-            // int int_input;
-            // input_object>>int_input;
-            // auto delete_number = find(begin(available_answer), end(available_answer), int_input);
-            // int index = delete_number - end(available_answer);
+            stringstream input_object(input);
+            int int_input;
+            input_object>>int_input;
+            available_answer.erase(std::remove(available_answer.begin(), available_answer.end(), int_input), available_answer.end());
         };
 
         void ToggleTurn() {
